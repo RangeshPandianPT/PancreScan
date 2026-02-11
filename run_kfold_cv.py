@@ -267,7 +267,11 @@ def train_one_fold(
     patience: int,
     freeze_backbone: bool,
     weight_decay: float,
+    output_dir: str = "outputs",
 ) -> Metrics:
+    save_dir = os.path.join(output_dir, f"kfold_{model_name}")
+    os.makedirs(save_dir, exist_ok=True)
+
     model = build_model(model_name, num_classes)
     
     if freeze_backbone:
@@ -321,7 +325,15 @@ def train_one_fold(
         if val_metrics.loss < best_loss:
             best_loss = val_metrics.loss
             best_metrics = val_metrics
+            best_loss = val_metrics.loss
+            best_metrics = val_metrics
             patience_counter = 0
+            # Save best model
+            # Save best model
+            save_path = f"{model_name}_fold_{fold_id}_best.pt"
+            if output_dir:
+                save_path = os.path.join(output_dir, save_path)
+            torch.save(model.state_dict(), save_path)
         else:
             patience_counter += 1
             if patience_counter >= patience:
@@ -620,6 +632,7 @@ def main() -> None:
             args.patience,
             args.freeze_backbone,
             args.weight_decay,
+            output_dir=args.output_dir,
         )
         fold_metrics.append(metrics)
 

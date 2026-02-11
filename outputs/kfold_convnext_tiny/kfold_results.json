@@ -1,0 +1,116 @@
+{
+  "config": {
+    "data_dir": "DATASET/train/train",
+    "k_folds": 5,
+    "epochs": 20,
+    "batch_size": 16,
+    "image_size": 224,
+    "lr": 0.0003,
+    "num_workers": 2,
+    "seed": 42,
+    "output_dir": "outputs/kfold_convnext_tiny",
+    "device": "auto",
+    "model": "convnext_tiny",
+    "aug_preset": "strong",
+    "sampler": "weighted",
+    "positive_class": "pancreatic_tumor",
+    "pos_threshold": 0.4,
+    "report_name": "PancreScan_KFold_ConvNeXtTiny",
+    "report_date": "2026-02-11",
+    "patience": 3,
+    "dropout": 0.5,
+    "freeze_backbone": true,
+    "weight_decay": 0.0001
+  },
+  "classes": [
+    "normal",
+    "pancreatic_tumor"
+  ],
+  "positive_class_index": 1,
+  "fold_metrics": [
+    {
+      "loss": 0.04327596724033356,
+      "accuracy": 0.9751243781094527,
+      "precision": 0.9738624873609707,
+      "recall": 0.9753042596348884,
+      "f1": 0.9745576061365535,
+      "pos_precision": 0.9826086956521739,
+      "pos_recall": 0.9741379310344828,
+      "pos_f1": 0.9783549783549784
+    },
+    {
+      "loss": 0.04055612124502659,
+      "accuracy": 0.995,
+      "precision": 0.9941176470588236,
+      "recall": 0.9956896551724138,
+      "f1": 0.994876917953841,
+      "pos_precision": 1.0,
+      "pos_recall": 0.9913793103448276,
+      "pos_f1": 0.9956709956709957
+    },
+    {
+      "loss": 0.06879706421867013,
+      "accuracy": 0.98,
+      "precision": 0.9772727272727273,
+      "recall": 0.9827586206896552,
+      "f1": 0.9796001631986944,
+      "pos_precision": 1.0,
+      "pos_recall": 0.9655172413793104,
+      "pos_f1": 0.9824561403508771
+    },
+    {
+      "loss": 0.04242795633021087,
+      "accuracy": 0.9849246231155779,
+      "precision": 0.9827586206896552,
+      "recall": 0.9869565217391305,
+      "f1": 0.9846201406600201,
+      "pos_precision": 1.0,
+      "pos_recall": 0.9739130434782609,
+      "pos_f1": 0.986784140969163
+    },
+    {
+      "loss": 0.0406243142639123,
+      "accuracy": 0.9798994974874372,
+      "precision": 0.979399585921325,
+      "recall": 0.979399585921325,
+      "f1": 0.979399585921325,
+      "pos_precision": 0.9826086956521739,
+      "pos_recall": 0.9826086956521739,
+      "pos_f1": 0.9826086956521739
+    }
+  ],
+  "summary": {
+    "loss": {
+      "mean": 0.04713628465963069,
+      "std": 0.010880846348866928
+    },
+    "accuracy": {
+      "mean": 0.9829896997424936,
+      "std": 0.006757842550012079
+    },
+    "precision": {
+      "mean": 0.9814822136607003,
+      "std": 0.00694839168291642
+    },
+    "recall": {
+      "mean": 0.9840217286314826,
+      "std": 0.006981510308831684
+    },
+    "f1": {
+      "mean": 0.9826108827740868,
+      "std": 0.006909773668102336
+    },
+    "pos_precision": {
+      "mean": 0.9930434782608696,
+      "std": 0.008519964322724102
+    },
+    "pos_recall": {
+      "mean": 0.9775112443778111,
+      "std": 0.008791924291233062
+    },
+    "pos_f1": {
+      "mean": 0.9851749901996376,
+      "std": 0.005886358310867284
+    }
+  }
+}
