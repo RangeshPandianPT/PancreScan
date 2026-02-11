@@ -23,6 +23,11 @@ DATASET/
 # Outputs (keep reports/jsons, ignore checkpoints in subdirs)
 outputs/**/checkpoints/
 outputs/**/*.pt
+!outputs/demo_models/efficientnet_v2_s_fold_1_best.pt
+
+# Specific exclusions to allow for demo
+!densenet121_best.pt
+
 outputs/**/*.pth
 
 # System
