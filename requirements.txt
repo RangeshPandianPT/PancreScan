@@ -1,0 +1,10 @@
+streamlit
+grad-cam
+opencv-python-headless
+numpy
+pillow
+
+# Use CPU-only versions for faster, smaller installs on Streamlit Cloud
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
