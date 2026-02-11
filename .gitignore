@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+
+# Environment variables
+.env
+
+# VS Code
+.vscode/
+
+# Datasets
+DATASET/
+
+# Model Weights (too large for GitHub)
+*.pt
+*.pth
+*.ckpt
+
+# Outputs (keep reports/jsons, ignore checkpoints in subdirs)
+outputs/**/checkpoints/
+outputs/**/*.pt
+outputs/**/*.pth
+
+# System
+Thumbs.db
+Desktop.ini

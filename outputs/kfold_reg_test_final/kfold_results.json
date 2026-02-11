@@ -1,0 +1,86 @@
+{
+  "config": {
+    "data_dir": "DATASET/train/train",
+    "k_folds": 2,
+    "epochs": 1,
+    "batch_size": 16,
+    "image_size": 224,
+    "lr": 0.0003,
+    "num_workers": 2,
+    "seed": 42,
+    "output_dir": "d:\\PancreScan\\outputs\\kfold_reg_test_final",
+    "device": "auto",
+    "model": "efficientnet_b0",
+    "aug_preset": "basic",
+    "sampler": "shuffle",
+    "positive_class": "pancreatic_tumor",
+    "pos_threshold": 0.4,
+    "report_name": "PancreScan_KFold_Report",
+    "report_date": "2026-02-10",
+    "patience": 2,
+    "dropout": 0.5,
+    "freeze_backbone": true,
+    "weight_decay": 0.0001
+  },
+  "classes": [
+    "normal",
+    "pancreatic_tumor"
+  ],
+  "positive_class_index": 1,
+  "fold_metrics": [
+    {
+      "loss": 0.34829492783546445,
+      "accuracy": 0.906,
+      "precision": 0.9196829405162739,
+      "recall": 0.8924629790583644,
+      "f1": 0.9009404335858299,
+      "pos_precision": 0.8734567901234568,
+      "pos_recall": 0.9792387543252595,
+      "pos_f1": 0.9233278955954324
+    },
+    {
+      "loss": 0.27487984066735766,
+      "accuracy": 0.9839679358717435,
+      "precision": 0.981651376146789,
+      "recall": 0.986159169550173,
+      "f1": 0.9836366617478275,
+      "pos_precision": 1.0,
+      "pos_recall": 0.972318339100346,
+      "pos_f1": 0.9859649122807017
+    }
+  ],
+  "summary": {
+    "loss": {
+      "mean": 0.3115873842514111,
+      "std": 0.0367075435840534
+    },
+    "accuracy": {
+      "mean": 0.9449839679358718,
+      "std": 0.03898396793587172
+    },
+    "precision": {
+      "mean": 0.9506671583315314,
+      "std": 0.030984217815257564
+    },
+    "recall": {
+      "mean": 0.9393110743042687,
+      "std": 0.04684809524590433
+    },
+    "f1": {
+      "mean": 0.9422885476668287,
+      "std": 0.04134811408099881
+    },
+    "pos_precision": {
+      "mean": 0.9367283950617284,
+      "std": 0.06327160493827161
+    },
+    "pos_recall": {
+      "mean": 0.9757785467128028,
+      "std": 0.003460207612456745
+    },
+    "pos_f1": {
+      "mean": 0.9546464039380671,
+      "std": 0.031318508342634666
+    }
+  }
+}

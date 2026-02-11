@@ -1,0 +1,85 @@
+{
+  "config": {
+    "data_dir": "DATASET/train/train",
+    "k_folds": 2,
+    "epochs": 5,
+    "batch_size": 16,
+    "image_size": 224,
+    "lr": 0.0003,
+    "num_workers": 2,
+    "seed": 42,
+    "output_dir": "d:\\PancreScan\\outputs\\kfold_reg_test",
+    "device": "auto",
+    "model": "efficientnet_b0",
+    "aug_preset": "basic",
+    "sampler": "shuffle",
+    "positive_class": "pancreatic_tumor",
+    "pos_threshold": 0.4,
+    "report_date": "2026-02-10",
+    "patience": 2,
+    "dropout": 0.5,
+    "freeze_backbone": true,
+    "weight_decay": 0.0001
+  },
+  "classes": [
+    "normal",
+    "pancreatic_tumor"
+  ],
+  "positive_class_index": 1,
+  "fold_metrics": [
+    {
+      "loss": 0.04081005184352398,
+      "accuracy": 0.98,
+      "precision": 0.9773755656108598,
+      "recall": 0.9826989619377162,
+      "f1": 0.9796231090245175,
+      "pos_precision": 1.0,
+      "pos_recall": 0.9653979238754326,
+      "pos_f1": 0.9823943661971831
+    },
+    {
+      "loss": 0.040012627348251534,
+      "accuracy": 0.9739478957915831,
+      "precision": 0.9742240751770234,
+      "recall": 0.9723018619212391,
+      "f1": 0.9732248624508311,
+      "pos_precision": 0.9726027397260274,
+      "pos_recall": 0.9826989619377162,
+      "pos_f1": 0.9776247848537005
+    }
+  ],
+  "summary": {
+    "loss": {
+      "mean": 0.04041133959588776,
+      "std": 0.000398712247636223
+    },
+    "accuracy": {
+      "mean": 0.9769739478957915,
+      "std": 0.003026052104208421
+    },
+    "precision": {
+      "mean": 0.9757998203939415,
+      "std": 0.0015757452169182229
+    },
+    "recall": {
+      "mean": 0.9775004119294777,
+      "std": 0.005198550008238545
+    },
+    "f1": {
+      "mean": 0.9764239857376743,
+      "std": 0.0031991232868432418
+    },
+    "pos_precision": {
+      "mean": 0.9863013698630136,
+      "std": 0.0136986301369863
+    },
+    "pos_recall": {
+      "mean": 0.9740484429065743,
+      "std": 0.008650519031141835
+    },
+    "pos_f1": {
+      "mean": 0.9800095755254419,
+      "std": 0.0023847906717412992
+    }
+  }
+}

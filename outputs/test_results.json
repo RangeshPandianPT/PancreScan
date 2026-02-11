@@ -1,0 +1,32 @@
+{
+  "densenet121": {
+    "loss": 0.000723770810558015,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "pos_precision": 1.0,
+    "pos_recall": 1.0,
+    "pos_f1": 1.0
+  },
+  "efficientnet_b0": {
+    "loss": 0.001320560290975478,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "pos_precision": 1.0,
+    "pos_recall": 1.0,
+    "pos_f1": 1.0
+  },
+  "ensemble": {
+    "loss": 0.0007444451077050156,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "pos_precision": 1.0,
+    "pos_recall": 1.0,
+    "pos_f1": 1.0
+  }
+}
