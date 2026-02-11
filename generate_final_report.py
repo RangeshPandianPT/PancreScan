@@ -11,6 +11,7 @@ OUTPUT_DIRS = {
     "EfficientNet-V2-S": "outputs/kfold_efficientnet_v2_s",
     "ConvNeXt-Tiny": "outputs/kfold_convnext_tiny"
 }
+TEST_RESULTS_PATH = "outputs/test_results.json"
 REPORT_FILENAME = "PancreScan_Final_Report.pdf"
 
 def load_results(model_name, output_dir):
@@ -20,6 +21,15 @@ def load_results(model_name, output_dir):
         return None
     
     with open(json_path, "r") as f:
+        data = json.load(f)
+    return data
+
+def load_test_results(output_dir="outputs"):
+    if not os.path.exists(TEST_RESULTS_PATH):
+        print(f"Warning: Test results not found at {TEST_RESULTS_PATH}")
+        return None
+    
+    with open(TEST_RESULTS_PATH, "r") as f:
         data = json.load(f)
     return data
 
@@ -50,7 +60,30 @@ def create_comparison_table(results_data):
     df = df[cols]
     return df
 
-def generate_html_report(df, results_data):
+def create_test_table(test_data):
+    if not test_data:
+        return None
+    rows = []
+    # test_data contains keys like "densenet121", "efficientnet_b0", "ensemble"
+    for model_name, metrics in test_data.items():
+        if isinstance(metrics, dict) and "accuracy" in metrics:
+            rows.append({
+                "Model": model_name,
+                "Test Accuracy": f"{metrics['accuracy']*100:.2f}%",
+                "F1-Score": f"{metrics['f1']:.4f}",
+                "Sensitivity": f"{metrics['pos_recall']*100:.2f}%",
+                "Precision": f"{metrics['precision']*100:.2f}%"
+            })
+    
+    if not rows:
+        return None
+
+    df = pd.DataFrame(rows)
+    cols = ["Model", "Test Accuracy", "F1-Score", "Sensitivity", "Precision"]
+    df = df[cols]
+    return df
+
+def generate_html_report(cv_df, test_df, results_data):
     html_content = f"""
     <html>
     <head>
@@ -72,12 +105,21 @@ def generate_html_report(df, results_data):
         <p><strong>Date:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
         <p>This report summarizes the performance of three deep learning models trained for pancreatic cancer detection using 5-fold cross-validation.</p>
 
-        <h2>🏆 Comparative Performance</h2>
+        <h2>🏆 Cross-Validation Performance (5-Fold)</h2>
         <p>The table below presents the mean performance metrics across all 5 folds.</p>
         
-        {df.to_html(index=False, border=0)}
+        {cv_df.to_html(index=False, border=0)}
+    """
+    
+    if test_df is not None:
+        html_content += f"""
+        <h2>🧪 Test Set Performance (Unseen Data)</h2>
+        <p>The table below presents the performance on the independent test set.</p>
+        {test_df.to_html(index=False, border=0)}
+        """
 
-        <h2>📝 Detailed Analysis</h2>
+    html_content += """
+        <h2>📝 Detailed CV Analysis</h2>
     """
 
     for model_name, data in results_data.items():
@@ -125,11 +167,19 @@ def main():
         results_data[name] = load_results(name, path)
     
     print("Creating comparison table...")
-    df = create_comparison_table(results_data)
-    print("\n" + df.to_string(index=False))
+    cv_df = create_comparison_table(results_data)
+    print("\nCross-Validation Results:")
+    print(cv_df.to_string(index=False))
     
+    print("Loading test results...")
+    test_data = load_test_results()
+    test_df = create_test_table(test_data)
+    if test_df is not None:
+        print("\nTest Set Results:")
+        print(test_df.to_string(index=False))
+
     print("Generating HTML report...")
-    html_content = generate_html_report(df, results_data)
+    html_content = generate_html_report(cv_df, test_df, results_data)
     
     print(f"Saving PDF to {REPORT_FILENAME}...")
     save_pdf(html_content, REPORT_FILENAME)
