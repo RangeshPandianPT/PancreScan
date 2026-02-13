@@ -6,3 +6,5 @@ grad-cam
 opencv-python-headless
 numpy
 pillow
+reportlab
+pandas

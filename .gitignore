@@ -30,6 +30,9 @@ outputs/**/*.pt
 
 outputs/**/*.pth
 
+# Local Database
+pancrescan.db
+
 # System
 Thumbs.db
 Desktop.ini
