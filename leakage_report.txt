@@ -1,0 +1,827 @@
+--- Data Leakage Report ---
+Total unique images in Train: 793
+Total unique images in Test: 412
+Exact Hash Duplicates: 8
+Filename Matches (Different Hash): 402
+
+Detailed List:
+Test: DATASET/test\test\normal\1-007.jpg
+   Matches: ['DATASET/train\\train\\normal\\1-007.jpg'] (Exact Hash Match)
+Test: DATASET/test\test\normal\1-012.jpg
+   Matches: ['DATASET/train\\train\\normal\\1-012.jpg'] (Exact Hash Match)
+Test: DATASET/test\test\normal\1-015.jpg
+   Matches: ['DATASET/train\\train\\normal\\1-015.jpg'] (Exact Hash Match)
+Test: DATASET/test\test\normal\1-016.jpg
+   Matches: ['DATASET/train\\train\\normal\\1-016.jpg'] (Exact Hash Match)
+Test: DATASET/test\test\normal\1-023.jpg
+   Matches: ['DATASET/train\\train\\normal\\1-023.jpg'] (Exact Hash Match)
+Test: DATASET/test\test\normal\1-024.jpg
+   Matches: ['DATASET/train\\train\\normal\\1-024.jpg'] (Exact Hash Match)
+Test: DATASET/test\test\normal\1-237 - Copy (73) - Copy - Copy.jpg
+   Matches: ['DATASET/train\\train\\normal\\1-237 - Copy (73) - Copy - Copy.jpg'] (Exact Hash Match)
+Test: DATASET/test\test\normal\1-239.jpg
+   Matches: ['DATASET/train\\train\\normal\\1-239.jpg'] (Exact Hash Match)
+Test: DATASET/test\test\normal\1-001.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-001.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-002.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-002.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-003.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-003.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-004.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-004.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-005.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-005.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-006.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-006.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-008.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-008.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-009.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-009.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-010.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-010.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-011.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-011.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-013.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-013.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-014.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-014.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-017.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-017.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-018.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-018.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-019.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-019.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-020.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-020.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-021.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-021.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-022.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-022.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-025.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-025.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-026.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-026.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-027.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-027.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-028.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-028.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-029.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-029.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-030.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-030.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-031.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-031.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-032.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-032.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-033.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-033.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-034.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-034.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-035.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-035.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-036.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-036.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-037.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-037.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-038.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-038.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-039.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-039.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-040.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-040.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-041.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-041.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-042.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-042.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-043.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-043.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-044.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-044.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-045.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-045.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-046.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-046.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-047.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-047.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-048.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-048.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-049.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-049.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-050.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-050.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-051.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-051.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-052.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-052.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-053.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-053.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-054.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-054.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-055.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-055.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-056.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-056.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-057.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-057.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-058.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-058.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-059.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-059.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-060.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-060.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-061.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-061.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-062.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-062.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-063.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-063.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-064.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-064.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-065.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-065.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-066.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-066.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-067.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-067.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-068.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-068.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-069.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-069.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-070.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-070.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-071.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-071.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-072.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-072.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-073.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-073.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-074.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-074.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-075.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-075.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-076.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-076.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-077.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-077.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-078.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-078.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-079.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-079.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-080.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-080.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-081.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-081.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-082.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-082.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-083.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-083.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-084.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-084.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-085.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-085.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-086.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-086.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-087.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-087.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-088.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-088.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-089.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-089.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-090.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-090.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-091.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-091.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-092.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-092.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-093.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-093.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-094.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-094.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-095.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-095.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-096.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-096.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-097.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-097.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-098.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-098.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-099.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-099.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-100.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-100.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-101.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-101.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-102.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-102.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-103.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-103.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-104.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-104.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-105.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-105.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-106.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-106.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-107.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-107.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-108.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-108.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-109.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-109.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-110.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-110.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-111.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-111.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-112.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-112.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-113.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-113.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-114.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-114.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-115.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-115.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-116.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-116.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-117.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-117.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-118.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-118.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-119.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-119.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-120.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-120.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-121.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-121.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-122.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-122.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-123.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-123.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-124.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-124.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-125.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-125.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-126.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-126.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-127.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-127.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-128.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-128.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-129.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-129.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-130.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-130.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-131.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-131.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-132.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-132.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-133.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-133.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-134.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-134.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-135.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-135.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-136.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-136.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-137.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-137.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-138.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-138.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-139.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-139.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-140.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-140.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-141.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-141.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-142.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-142.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-143.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-143.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-144.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-144.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-145.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-145.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-146.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-146.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-147.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-147.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-148.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-148.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-149.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-149.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-150.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-150.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-151.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-151.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-152.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-152.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-153.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-153.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-154.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-154.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-155.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-155.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-156.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-156.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-157.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-157.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-158.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-158.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-159.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-159.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-160.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-160.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-161.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-161.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-162.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-162.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-163.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-163.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-164.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-164.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-165.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-165.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-166.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-166.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-167.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-167.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-168.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-168.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-169.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-169.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-170.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-170.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-171.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-171.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-172.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-172.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-173.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-173.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-174.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-174.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-175.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-175.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-176.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-176.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-177.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-177.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-178.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-178.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-179.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-179.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-180.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-180.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-181.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-181.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-182.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-182.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-183.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-183.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-184.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-184.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-185.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-185.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-186.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-186.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-187.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-187.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-188.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-188.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-189.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-189.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-190.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-190.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-191.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-191.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-192.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-192.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-193.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-193.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-194.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-194.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-195.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-195.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-196.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-196.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-197.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-197.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-198.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-198.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-199.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-199.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-200.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-200.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-201.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-201.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-202.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-202.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-203.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-203.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-204.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-204.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-205.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-205.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-206.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-206.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-207.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-207.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-208.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-208.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-209.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-209.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-210.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-210.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-211.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-211.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-212.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-212.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-213.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-213.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-214.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-214.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-215.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-215.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-216.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-216.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-217.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-217.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-218.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-218.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-219.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-219.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-220.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-220.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\normal\1-221.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-221.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-001.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-001.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-002.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-002.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-003.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-003.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-004.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-004.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-005.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-005.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-006.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-006.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-007.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-007.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-008.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-008.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-009.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-009.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-010.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-010.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-011.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-011.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-012.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-012.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-013.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-013.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-014.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-014.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-015.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-015.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-016.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-016.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-017.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-017.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-018.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-018.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-019.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-019.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-020.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-020.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-021.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-021.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-022.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-022.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-023.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-023.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-024.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-024.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-025.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-025.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-026.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-026.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-027.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-027.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-028.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-028.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-029.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-029.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-030.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-030.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-031.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-031.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-032.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-032.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-033.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-033.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-034.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-034.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-035.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-035.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-036.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-036.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-037.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-037.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-038.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-038.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-039.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-039.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-040.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-040.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-041.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-041.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-042.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-042.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-043.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-043.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-044.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-044.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-045.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-045.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-046.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-046.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-047.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-047.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-048.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-048.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-049.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-049.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-050.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-050.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-051.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-051.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-052.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-052.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-053.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-053.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-054.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-054.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-055.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-055.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-056.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-056.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-057.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-057.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-058.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-058.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-059.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-059.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-060.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-060.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-061.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-061.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-062.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-062.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-063.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-063.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-064.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-064.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-065.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-065.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-066.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-066.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-067.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-067.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-068.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-068.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-069.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-069.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-070.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-070.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-071.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-071.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-072.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-072.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-073.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-073.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-074.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-074.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-075.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-075.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-076.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-076.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-077.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-077.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-078.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-078.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-079.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-079.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-080.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-080.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-081.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-081.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-082.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-082.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-083.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-083.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-084.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-084.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-085.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-085.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-086.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-086.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-087.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-087.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-088.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-088.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-089.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-089.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-090.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-090.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-091.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-091.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-092.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-092.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-093.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-093.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-094.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-094.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-095.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-095.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-096.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-096.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-097.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-097.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-098.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-098.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-099.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-099.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-100.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-100.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-101.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-101.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-102.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-102.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-103.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-103.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-104.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-104.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-105.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-105.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-106.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-106.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-107.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-107.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-108.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-108.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-109.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-109.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-110.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-110.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-111.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-111.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-112.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-112.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-113.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-113.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-114.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-114.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-115.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-115.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-116.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-116.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-117.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-117.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-118.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-118.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-119.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-119.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-120.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-120.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-121.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-121.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-122.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-122.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-123.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-123.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-124.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-124.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-125.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-125.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-126.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-126.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-127.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-127.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-128.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-128.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-129.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-129.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-130.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-130.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-131.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-131.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-132.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-132.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-133.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-133.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-134.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-134.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-135.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-135.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-136.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-136.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-137.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-137.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-138.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-138.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-139.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-139.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-140.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-140.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-141.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-141.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-142.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-142.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-143.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-143.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-144.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-144.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-145.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-145.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-146.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-146.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-147.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-147.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-148.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-148.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-149.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-149.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-150.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-150.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-151.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-151.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-152.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-152.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-153.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-153.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-154.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-154.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-155.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-155.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-156.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-156.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-157.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-157.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-158.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-158.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-159.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-159.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-160.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-160.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-161.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-161.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-162.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-162.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-163.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-163.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-164.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-164.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-165.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-165.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-166.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-166.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-167.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-167.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-168.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-168.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-169.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-169.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-170.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-170.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-171.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-171.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-172.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-172.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-173.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-173.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-174.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-174.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-175.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-175.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-176.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-176.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-177.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-177.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-178.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-178.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-179.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-179.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-180.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-180.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-181.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-181.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-182.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-182.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-183.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-183.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-184.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-184.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-185.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-185.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-186.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-186.jpg'] (Filename Match (Different Hash))
+Test: DATASET/test\test\pancreatic_tumor\1-187.jpg
+   Matches: ['DATASET/train\\train\\pancreatic_tumor\\1-187.jpg'] (Filename Match (Different Hash))
