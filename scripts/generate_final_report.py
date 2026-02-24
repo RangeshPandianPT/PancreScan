@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from xhtml2pdf import pisa
 from datetime import datetime
 
+# SCRIPT IS INTENDED TO BE RUN FROM PROJECT ROOT
 # Configuration
 OUTPUT_DIRS = {
     "DenseNet121": "outputs/kfold_densenet121",
@@ -12,7 +13,7 @@ OUTPUT_DIRS = {
     "ConvNeXt-Tiny": "outputs/kfold_convnext_tiny"
 }
 TEST_RESULTS_PATH = "outputs/test_results.json"
-REPORT_FILENAME = "PancreScan_Final_Report.pdf"
+REPORT_FILENAME = "docs/PancreScan_Final_Report.pdf"
 
 def load_results(model_name, output_dir):
     json_path = os.path.join(output_dir, "kfold_results.json")

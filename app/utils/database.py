@@ -2,7 +2,8 @@ import sqlite3
 from datetime import datetime
 import os
 
-DB_NAME = "pancrescan.db"
+# DB will be in the project root found relative to this file: app/utils/database.py -> ../../pancrescan.db
+DB_NAME = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "pancrescan.db")
 
 def get_db_connection():
     conn = sqlite3.connect(DB_NAME)

@@ -14,15 +14,15 @@ from pytorch_grad_cam.utils.image import show_cam_on_image
 from datetime import datetime
 
 # Import Custom Modules
-import database
-import report_generator
+from utils import database
+from utils import report_generator
 
 # --- Configuration ---
 st.set_page_config(page_title="PancreScan AI", page_icon="🏥", layout="wide")
 
-MODEL_PATH_DENSE = "densenet121_best.pt"
-MODEL_PATH_EFFICIENT = "outputs/demo_models/efficientnet_v2_s_fold_1_best.pt"
-MODEL_PATH_CONVNEXT = "convnext_tiny_best.pt"
+MODEL_PATH_DENSE = "../models/densenet121_best.pt"
+MODEL_PATH_EFFICIENT = "../outputs/demo_models/efficientnet_v2_s_fold_1_best.pt"
+MODEL_PATH_CONVNEXT = "../models/convnext_tiny_best.pt"
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
