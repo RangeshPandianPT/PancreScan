@@ -1,3 +1,14 @@
+---
+title: PancreScan
+emoji: 🧬
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+sdk_version: "1.42.0"
+app_file: app/app.py
+pinned: false
+---
+
 # PancreScan: AI-Powered Pancreatic Cancer Detection
 
 PancreScan is a deep learning research project designed to detect pancreatic cancer from CT scan images. It utilizes an ensemble of state-of-the-art Convolutional Neural Networks (CNNs) to achieve high diagnostic accuracy.
