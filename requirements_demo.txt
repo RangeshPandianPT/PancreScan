@@ -1,7 +1,8 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
 streamlit
 grad-cam
 opencv-python-headless
-torch
-torchvision
+torch==2.6.0+cpu
+torchvision==0.21.0+cpu
 numpy
 pillow
