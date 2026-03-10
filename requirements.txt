@@ -1,10 +1,14 @@
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.6.0+cpu
-torchvision==0.21.0+cpu
+torch==2.5.1+cpu
+torchvision==0.20.1+cpu
 streamlit
-grad-cam
 opencv-python-headless
-numpy
+numpy<2
 pillow
 reportlab
 pandas
+matplotlib
+scikit-learn
+tqdm
+ttach
+grad-cam
