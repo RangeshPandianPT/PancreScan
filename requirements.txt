@@ -1,9 +1,9 @@
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.5.1+cpu
-torchvision==0.20.1+cpu
+torch==2.10.0+cpu
+torchvision
 streamlit
 opencv-python-headless
-numpy<2
+numpy
 pillow
 reportlab
 pandas
