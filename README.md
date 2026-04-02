@@ -49,8 +49,6 @@ python run_kfold_cv.py --model [MODEL_NAME] --k-folds 5 --epochs 20 --freeze-bac
 *   `densenet121`
 *   `efficientnet_v2_s`
 *   `convnext_tiny`
-*   `efficientnet_b0` (Legacy)
-*   `resnet50` (Legacy)
 
 **Example:**
 ```bash

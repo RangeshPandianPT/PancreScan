@@ -213,6 +213,13 @@ def load_model(model_name):
             num_ftrs = model.classifier[2].in_features
             model.classifier[2] = nn.Linear(num_ftrs, 2)
         
+        elif "UNet" in model_name:
+            import sys
+            sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+            from src.models.unet import UNetMultiTask
+            model = UNetMultiTask(n_channels=3, n_classes=1, num_cls_classes=1)
+            trained_model_path = os.path.join(BASE_DIR, "outputs", "unet", "unet_multitask_best.pt")
+        
         if os.path.exists(trained_model_path):
             state_dict = torch.load(trained_model_path, map_location=DEVICE, weights_only=False)
             model.load_state_dict(state_dict)
@@ -236,6 +243,8 @@ def get_target_layer(model, model_name):
         return [model.features[-1]]
     elif "ConvNeXt" in model_name:
         return [model.features[-1]]
+    elif "UNet" in model_name:
+        return [model.features]
     return None
 
 def render_hero_section():
@@ -315,7 +324,7 @@ def main():
     st.sidebar.subheader("⚙️ Configuration")
     model_selector = st.sidebar.selectbox(
         "Model Architecture",
-        ["EfficientNet-V2-S (Recommended)", "DenseNet121", "ConvNeXt-Tiny"]
+        ["EfficientNet-V2-S (Recommended)", "DenseNet121", "ConvNeXt-Tiny", "UNet (Multi-Task Segmentation)"]
     )
     
     # --- Model Performance Metrics (from 5-Fold Cross-Validation) ---
@@ -415,7 +424,13 @@ def render_single_scan_ui(model_selector, threshold):
     with tab1:
         uploaded_file = st.file_uploader("Upload a CT Slice (JPG/PNG)", type=["jpg", "png", "jpeg"])
         if uploaded_file:
-            image = Image.open(uploaded_file).convert("RGB")
+            # Only reset if we upload a new file, but file uploader state persists
+            if st.session_state.get('last_uploaded_file') != uploaded_file.name:
+                st.session_state['current_image'] = Image.open(uploaded_file).convert("RGB")
+                st.session_state['last_uploaded_file'] = uploaded_file.name
+                st.session_state['analyzed'] = False
+                st.session_state.pop('tumor_prob', None)
+                st.session_state.pop('last_mask', None)
             
     with tab2:
         col_ex1, col_ex2 = st.columns(2)
@@ -423,16 +438,25 @@ def render_single_scan_ui(model_selector, threshold):
             if st.button("Load Normal Example"):
                 image_path = os.path.join(BASE_DIR, "DATASET", "test", "test", "normal", "1-001.jpg")
                 if os.path.exists(image_path):
-                    image = Image.open(image_path).convert("RGB")
+                    st.session_state['current_image'] = Image.open(image_path).convert("RGB")
+                    st.session_state['analyzed'] = False
+                    st.session_state.pop('tumor_prob', None)
+                    st.session_state.pop('last_mask', None)
                 else:
                     st.error("Example image not found.")
         with col_ex2:
             if st.button("Load Tumor Example"):
                 image_path = os.path.join(BASE_DIR, "DATASET", "test", "test", "pancreatic_tumor", "1-001.jpg")
                 if os.path.exists(image_path):
-                    image = Image.open(image_path).convert("RGB")
+                    st.session_state['current_image'] = Image.open(image_path).convert("RGB")
+                    st.session_state['analyzed'] = False
+                    st.session_state.pop('tumor_prob', None)
+                    st.session_state.pop('last_mask', None)
                 else:
                     st.error("Example image not found.")
+    
+    # Get image from session
+    image = st.session_state.get('current_image')
     
     # Analysis UI
     if image:
@@ -441,7 +465,7 @@ def render_single_scan_ui(model_selector, threshold):
         col1, col2 = st.columns([1, 1.5])
         
         with col1:
-            st.image(image, caption="Input Scan", use_column_width=True)
+            st.image(image, caption="Input Scan", use_container_width=True)
             
             if st.button("🔍 Run Analysis", use_container_width=True):
                 with st.spinner("Analyzing scan pattern..."):
@@ -454,8 +478,18 @@ def render_single_scan_ui(model_selector, threshold):
                         # Inference
                         with torch.no_grad():
                             outputs = model(input_tensor)
-                            probs = torch.softmax(outputs, dim=1)
-                            tumor_prob = probs[0][1].item()
+                            if isinstance(outputs, tuple) and len(outputs) == 2:
+                                mask_pred, outputs = outputs
+                                mask_prob = torch.sigmoid(mask_pred[0, 0])
+                                st.session_state['last_mask'] = mask_prob.detach().cpu().numpy()
+                            else:
+                                st.session_state['last_mask'] = None
+                                
+                            if outputs.shape[1] == 1:
+                                tumor_prob = torch.sigmoid(outputs).item()
+                            else:
+                                probs = torch.softmax(outputs, dim=1)
+                                tumor_prob = probs[0][1].item()
                             
                         # Store results in session state
                         st.session_state['tumor_prob'] = tumor_prob
@@ -480,10 +514,36 @@ def render_single_scan_ui(model_selector, threshold):
         with col2:
             if st.session_state.get('analyzed', False):
                 tumor_prob = st.session_state.get('tumor_prob', 0.0)
+                mask_np = st.session_state.get('last_mask', None)
+                
                 is_tumor = tumor_prob > threshold
+                is_inconclusive = False
+                if mask_np is not None:
+                    mask_area = (mask_np > 0.5).sum()
+                    if mask_area < 10 or (0.45 < tumor_prob < 0.55):
+                        is_inconclusive = True
                 
                 # Dynamic Card Rendering
-                if is_tumor:
+                if is_inconclusive:
+                    st.markdown(
+                        f"""
+                        <div class="result-card" style="background-color: #fff3cd; border-left: 6px solid #ffcc00; color: #856404;">
+                            <div class="card-title" style="color: #856404;">
+                                ⚠️ Inconclusive Data
+                            </div>
+                            <p style="font-size: 1.1rem;">
+                                The model could not find a clear pancreas region or the CT slice is poor quality (No Valid Anatomy Masked). 
+                                Please test another slice.
+                            </p>
+                            <div style="margin-top: 15px;">
+                                <div class="confidence-label">Measured Confidence</div>
+                                <div class="confidence-score">{tumor_prob*100:.2f}%</div>
+                            </div>
+                        </div>
+                        """, 
+                        unsafe_allow_html=True
+                    )
+                elif is_tumor:
                     st.markdown(
                         f"""
                         <div class="result-card result-card-tumor">
@@ -520,12 +580,29 @@ def render_single_scan_ui(model_selector, threshold):
                 st.progress(tumor_prob)
                 st.caption(f"Tumor Probability: {tumor_prob:.4f}")
                 
+                if mask_np is not None:
+                    st.markdown("#### Structural Mask Overlay (Pancreas)")
+                    base_img = np.array(image.resize((224, 224))).astype(np.float32) / 255.0
+                    mask_heat = np.zeros_like(base_img)
+                    mask_heat[..., 0] = mask_np # Red tint
+                    overlay = np.clip(base_img * 0.6 + mask_heat * 0.4, 0.0, 1.0)
+                    st.image(overlay, caption="Blue/Red highlight shows dynamically segmented pancreas", use_container_width=True)
+                
                 with st.expander("Show AI Reasoning (Grad-CAM)"):
                     try:
                         target_layers = get_target_layer(model, model_selector)
                         if target_layers:
-                            cam = GradCAM(model=model, target_layers=target_layers)
-                            targets = [ClassifierOutputTarget(1)] # Focus on Tumor
+                            class _Wrapper(nn.Module):
+                                def __init__(self, m):
+                                    super().__init__()
+                                    self._m = m
+                                def forward(self, x):
+                                    o = self._m(x)
+                                    return o[1] if isinstance(o, tuple) else o
+                            
+                            wrapped = _Wrapper(model)
+                            cam = GradCAM(model=wrapped, target_layers=target_layers)
+                            targets = [ClassifierOutputTarget(0)] if outputs.shape[1] == 1 else [ClassifierOutputTarget(1)]
                             input_tensor = preprocess(image).unsqueeze(0).to(DEVICE)
                             
                             grayscale_cam = cam(input_tensor=input_tensor, targets=targets)
@@ -534,7 +611,7 @@ def render_single_scan_ui(model_selector, threshold):
                             img_np = np.array(image.resize((224, 224))) / 255.0
                             visualization = show_cam_on_image(img_np, grayscale_cam, use_rgb=True)
                             
-                            st.image(visualization, caption="Heatmap: Red areas indicate regions contributing to Tumor classification", use_column_width=True)
+                            st.image(visualization, caption="Heatmap: Red areas indicate regions contributing to Tumor classification", use_container_width=True)
                     except Exception as e:
                         st.warning(f"Visualization unavailable: {e}")
 
@@ -557,8 +634,13 @@ def render_batch_analysis_ui(model_selector, threshold):
                     
                     with torch.no_grad():
                         outputs = model(input_tensor)
-                        probs = torch.softmax(outputs, dim=1)
-                        tumor_prob = probs[0][1].item()
+                        if isinstance(outputs, tuple) and len(outputs) == 2:
+                            _, outputs = outputs
+                        if outputs.shape[1] == 1:
+                            tumor_prob = torch.sigmoid(outputs).item()
+                        else:
+                            probs = torch.softmax(outputs, dim=1)
+                            tumor_prob = probs[0][1].item()
                     
                     results.append({
                         "Filename": file.name,
