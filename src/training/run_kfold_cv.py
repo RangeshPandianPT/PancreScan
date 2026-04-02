@@ -82,24 +82,6 @@ def build_model(name: str, num_classes: int) -> nn.Module:
             nn.Linear(in_features, num_classes)
         )
         return model
-    if name == "efficientnet_b0":
-        weights = models.EfficientNet_B0_Weights.IMAGENET1K_V1
-        model = models.efficientnet_b0(weights=weights)
-        in_features = model.classifier[1].in_features
-        model.classifier[1] = nn.Sequential(
-            nn.Dropout(p=0.5),
-            nn.Linear(in_features, num_classes)
-        )
-        return model
-    if name == "resnet50":
-        weights = models.ResNet50_Weights.IMAGENET1K_V2
-        model = models.resnet50(weights=weights)
-        in_features = model.fc.in_features
-        model.fc = nn.Sequential(
-            nn.Dropout(p=0.5),
-            nn.Linear(in_features, num_classes)
-        )
-        return model
     if name == "efficientnet_v2_s":
         weights = models.EfficientNet_V2_S_Weights.IMAGENET1K_V1
         model = models.efficientnet_v2_s(weights=weights)
@@ -524,7 +506,7 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=42, help="Random seed.")
     parser.add_argument("--output-dir", default="outputs", help="Output directory.")
     parser.add_argument("--device", default="auto", help="Device: auto, cuda, or cpu.")
-    parser.add_argument("--model", default="efficientnet_b0", help="Backbone (densenet121, efficientnet_b0, resnet50, efficientnet_v2_s, convnext_tiny).")
+    parser.add_argument("--model", default="efficientnet_v2_s", help="Backbone (densenet121, efficientnet_v2_s, convnext_tiny).")
     parser.add_argument("--aug-preset", default="basic", choices=["basic", "strong"], help="Augmentation strength.")
     parser.add_argument("--sampler", default="shuffle", choices=["shuffle", "weighted"], help="Sampling strategy.")
     parser.add_argument(

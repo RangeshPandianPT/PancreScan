@@ -105,16 +105,6 @@ def build_model(name: str, num_classes: int) -> nn.Module:
         model = models.densenet121(weights=weights)
         model.classifier = nn.Linear(model.classifier.in_features, num_classes)
         return model
-    if name == "efficientnet_b0":
-        weights = models.EfficientNet_B0_Weights.IMAGENET1K_V1
-        model = models.efficientnet_b0(weights=weights)
-        model.classifier[1] = nn.Linear(model.classifier[1].in_features, num_classes)
-        return model
-    if name == "resnet50":
-        weights = models.ResNet50_Weights.IMAGENET1K_V2
-        model = models.resnet50(weights=weights)
-        model.fc = nn.Linear(model.fc.in_features, num_classes)
-        return model
     if name == "efficientnet_v2_s":
         weights = models.EfficientNet_V2_S_Weights.IMAGENET1K_V1
         model = models.efficientnet_v2_s(weights=weights)
@@ -441,8 +431,8 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=42, help="Random seed.")
     parser.add_argument("--output-dir", default="outputs", help="Output directory.")
     parser.add_argument("--device", default="auto", help="Device: auto, cuda, or cpu.")
-    parser.add_argument("--model-a", default="densenet121", help="First backbone (densenet121, efficientnet_b0, resnet50, efficientnet_v2_s, convnext_tiny).")
-    parser.add_argument("--model-b", default="efficientnet_b0", help="Second backbone (densenet121, efficientnet_b0, resnet50, efficientnet_v2_s, convnext_tiny).")
+    parser.add_argument("--model-a", default="densenet121", help="First backbone (densenet121, efficientnet_v2_s, convnext_tiny).")
+    parser.add_argument("--model-b", default="efficientnet_v2_s", help="Second backbone (densenet121, efficientnet_v2_s, convnext_tiny).")
     parser.add_argument("--aug-preset", default="basic", choices=["basic", "strong"], help="Augmentation strength.")
     parser.add_argument("--sampler", default="shuffle", choices=["shuffle", "weighted"], help="Sampling strategy.")
     parser.add_argument("--loss", default="cross_entropy", choices=["cross_entropy", "focal"], help="Loss function.")
@@ -461,7 +451,7 @@ def main() -> None:
     parser.add_argument(
         "--ensemble-weights",
         default="0.5,0.5",
-        help="Comma-separated weights for DenseNet121,EfficientNet-B0.",
+        help="Comma-separated weights for your two selected models.",
     )
     args = parser.parse_args()
 
@@ -530,8 +520,8 @@ def main() -> None:
     config["ensemble_weights"] = ensemble_weights
     save_run_config(os.path.join(args.output_dir, "run_config.json"), config)
 
-    print("Training DenseNet121...")
-    densenet_path = train_model(
+    print(f"Training {args.model_a}...")
+    model_a_path = train_model(
         args.model_a,
         train_loader,
         val_loader,
@@ -547,8 +537,8 @@ def main() -> None:
         args.focal_gamma,
     )
 
-    print("Training EfficientNet-B0...")
-    efficientnet_path = train_model(
+    print(f"Training {args.model_b}...")
+    model_b_path = train_model(
         args.model_b,
         train_loader,
         val_loader,
@@ -565,9 +555,9 @@ def main() -> None:
     )
 
     print("Evaluating on test set...")
-    dense_metrics = evaluate_model(
+    model_a_metrics = evaluate_model(
         args.model_a,
-        densenet_path,
+        model_a_path,
         test_loader,
         num_classes,
         device,
@@ -576,9 +566,9 @@ def main() -> None:
         args.loss,
         args.focal_gamma,
     )
-    eff_metrics = evaluate_model(
+    model_b_metrics = evaluate_model(
         args.model_b,
-        efficientnet_path,
+        model_b_path,
         test_loader,
         num_classes,
         device,
@@ -590,8 +580,8 @@ def main() -> None:
     ens_metrics = evaluate_ensemble(
         args.model_a,
         args.model_b,
-        densenet_path,
-        efficientnet_path,
+        model_a_path,
+        model_b_path,
         test_loader,
         num_classes,
         device,
@@ -601,8 +591,8 @@ def main() -> None:
     )
 
     results = {
-        "densenet121": dense_metrics.__dict__,
-        "efficientnet_b0": eff_metrics.__dict__,
+        args.model_a: model_a_metrics.__dict__,
+        args.model_b: model_b_metrics.__dict__,
         "ensemble": ens_metrics.__dict__,
     }
 

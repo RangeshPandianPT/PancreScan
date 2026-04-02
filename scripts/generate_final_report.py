@@ -65,7 +65,7 @@ def create_test_table(test_data):
     if not test_data:
         return None
     rows = []
-    # test_data contains keys like "densenet121", "efficientnet_b0", "ensemble"
+    # test_data contains keys like "densenet121", "efficientnet_v2_s", "ensemble"
     for model_name, metrics in test_data.items():
         if isinstance(metrics, dict) and "accuracy" in metrics:
             rows.append({

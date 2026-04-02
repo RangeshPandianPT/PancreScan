@@ -67,15 +67,10 @@ def split_dataset(
 
 
 def build_model(name: str) -> nn.Module:
-    if name == "efficientnet_b0":
-        weights = models.EfficientNet_B0_Weights.IMAGENET1K_V1
-        model = models.efficientnet_b0(weights=weights)
+    if name == "efficientnet_v2_s":
+        weights = models.EfficientNet_V2_S_Weights.IMAGENET1K_V1
+        model = models.efficientnet_v2_s(weights=weights)
         model.classifier[1] = nn.Linear(model.classifier[1].in_features, 1)
-        return model
-    if name == "resnet50":
-        weights = models.ResNet50_Weights.IMAGENET1K_V2
-        model = models.resnet50(weights=weights)
-        model.fc = nn.Linear(model.fc.in_features, 1)
         return model
     raise ValueError(f"Unsupported model: {name}")
 
@@ -138,7 +133,7 @@ def run_epoch(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Phase 1 baseline: EfficientNet-B0 binary classifier")
+    parser = argparse.ArgumentParser(description="Phase 1 baseline: EfficientNet-V2-S binary classifier")
     parser.add_argument("--train-dir", default="DATASET/train/train", help="Path to training data root")
     parser.add_argument("--test-dir", default="DATASET/test/test", help="Path to test data root")
     parser.add_argument("--val-ratio", type=float, default=0.2, help="Validation split ratio")
@@ -150,7 +145,7 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
     parser.add_argument("--output-dir", default="outputs", help="Output directory")
     parser.add_argument("--device", default="auto", help="Device: auto, cuda, or cpu")
-    parser.add_argument("--model", default="efficientnet_b0", help="Backbone (efficientnet_b0, resnet50)")
+    parser.add_argument("--model", default="efficientnet_v2_s", help="Backbone (efficientnet_v2_s)")
     parser.add_argument("--aug-preset", default="basic", choices=["basic", "strong"], help="Augmentation strength")
     parser.add_argument("--sampler", default="shuffle", choices=["shuffle", "weighted"], help="Sampling strategy")
     parser.add_argument(
@@ -216,7 +211,7 @@ def main() -> None:
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
 
     best_val_loss = float("inf")
-    best_path = os.path.join(args.output_dir, "efficientnet_b0_phase1_best.pt")
+    best_path = os.path.join(args.output_dir, f"{args.model}_phase1_best.pt")
 
     for epoch in range(1, args.epochs + 1):
         train_loss, train_acc = run_epoch(model, train_loader, criterion, optimizer, device, train=True)
