@@ -49,7 +49,7 @@ We are moving from an Unsupervised Autoencoder to a **Supervised Convolutional N
 graph LR
     A[Input CT Image .jpg] --> B(Preprocessing);
     B --> C{AI Classifier};
-    C -- Feature Extraction --> D[ResNet50 / EfficientNet];
+    C -- Feature Extraction --> D[EfficientNet-V2-S / ConvNeXt-Tiny];
     D -- Classification Head --> E[Probability Score];
     E --> F[Result: Normal vs Tumor];
 ```
@@ -61,7 +61,7 @@ graph LR
     *   Normalization to scale pixel intensity values.
 
 2.  **Model Selection (Transfer Learning):**
-    *   We will use **ResNet50** or **EfficientNet-B0**, pre-trained on ImageNet.
+    *   We will use **EfficientNet-V2-S**, **DenseNet121**, or **ConvNeXt-Tiny**, pre-trained on ImageNet.
     *   **Why?** These models have already learned how to detect edges, textures, and shapes. We will "fine-tune" the final layers to specifically recognize pancreatic tissue textures instead of generic objects.
 
 3.  **Training Strategy:**
@@ -104,7 +104,7 @@ By the end of the hackathon, we will deliver a fully functional **SaaS Platform 
 2.  **Backend:** Setup the FastAPI to load the `.pth` / `.h5` model file.
 3.  **ML Team:**
     *   Load the new dataset.
-    *   Train ResNet50 for 10-20 epochs.
+    *   Train EfficientNet-V2-S for 10-20 epochs.
     *   Save the best weights for the demo.
 
 ---
