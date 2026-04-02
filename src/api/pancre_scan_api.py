@@ -66,10 +66,21 @@ def build_model(model_name: str, num_classes: int = 2) -> nn.Module:
         model = models.densenet121(weights=weights)
         model.classifier = nn.Linear(model.classifier.in_features, num_classes)
         return model
-    if model_name == "efficientnet_b0":
-        weights = models.EfficientNet_B0_Weights.IMAGENET1K_V1
-        model = models.efficientnet_b0(weights=weights)
+    if model_name == "efficientnet_v2_s":
+        weights = models.EfficientNet_V2_S_Weights.IMAGENET1K_V1
+        model = models.efficientnet_v2_s(weights=weights)
         model.classifier[1] = nn.Linear(model.classifier[1].in_features, num_classes)
+        return model
+    if model_name == "convnext_tiny":
+        weights = models.ConvNeXt_Tiny_Weights.IMAGENET1K_V1
+        model = models.convnext_tiny(weights=weights)
+        model.classifier[2] = nn.Linear(model.classifier[2].in_features, num_classes)
+        return model
+    if model_name == "unet":
+        import sys
+        sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+        from src.models.unet import UNetMultiTask
+        model = UNetMultiTask(n_channels=3, n_classes=1, num_cls_classes=1)
         return model
     raise ValueError(f"Unsupported model: {model_name}")
 
@@ -77,8 +88,12 @@ def build_model(model_name: str, num_classes: int = 2) -> nn.Module:
 def get_target_layer(model: nn.Module, model_name: str) -> nn.Module:
     if model_name == "densenet121":
         return model.features
-    if model_name == "efficientnet_b0":
+    if model_name == "efficientnet_v2_s":
         return model.features[-1]
+    if model_name == "convnext_tiny":
+        return model.features[-1]
+    if model_name == "unet":
+        return model.features
     raise ValueError(f"Unsupported model: {model_name}")
 
 
@@ -157,8 +172,8 @@ class ModelBundle:
         self.preprocess = build_preprocess(self.image_size)
 
         primary = ModelConfig(
-            model_name=os.getenv("PRIMARY_MODEL", "efficientnet_b0"),
-            checkpoint_path=os.getenv("PRIMARY_CHECKPOINT", "outputs/efficientnet_b0_best.pt"),
+            model_name=os.getenv("PRIMARY_MODEL", "efficientnet_v2_s"),
+            checkpoint_path=os.getenv("PRIMARY_CHECKPOINT", "outputs/efficientnet_v2_s_best.pt"),
         )
         secondary_path = os.getenv("SECONDARY_CHECKPOINT")
         secondary_name = os.getenv("SECONDARY_MODEL", "densenet121")
@@ -174,10 +189,18 @@ class ModelBundle:
         self.grad_cam = GradCAM(self.primary, target_layer)
 
     def predict_logits(self, image_tensor: torch.Tensor) -> torch.Tensor:
-        logits = self.primary(image_tensor)
+        out1 = self.primary(image_tensor)
+        if isinstance(out1, tuple) and len(out1) == 2:
+            self.last_segment_mask, logits = out1
+        else:
+            self.last_segment_mask = None
+            logits = out1
+            
         if self.secondary is None:
             return logits
-        logits_secondary = self.secondary(image_tensor)
+            
+        out2 = self.secondary(image_tensor)
+        logits_secondary = out2[1] if isinstance(out2, tuple) and len(out2) == 2 else out2
         return logits * self.ensemble_weights[0] + logits_secondary * self.ensemble_weights[1]
 
 
@@ -203,8 +226,11 @@ async def predict(
     start = time.perf_counter()
     with torch.no_grad():
         logits = bundle.predict_logits(input_tensor)
-        probs = torch.softmax(logits, dim=1)
-        pos_prob = probs[0, bundle.positive_index].item()
+        if logits.shape[1] == 1:
+            pos_prob = torch.sigmoid(logits).item()
+        else:
+            probs = torch.softmax(logits, dim=1)
+            pos_prob = probs[0, bundle.positive_index].item()
 
     inference_ms = (time.perf_counter() - start) * 1000.0
     diagnosis = (
@@ -212,11 +238,30 @@ async def predict(
     )
 
     heatmap_b64: Optional[str] = None
+    mask_b64: Optional[str] = None
+    
     if heatmap and diagnosis == bundle.positive_name:
-        score = logits[0, bundle.positive_index]
+        score = logits[0, 0] if logits.shape[1] == 1 else logits[0, bundle.positive_index]
         cam = bundle.grad_cam.generate(score, (bundle.image_size, bundle.image_size))
         overlay = make_overlay(image.resize((bundle.image_size, bundle.image_size)), cam)
         heatmap_b64 = image_to_base64(overlay)
+
+    # Inconclusive Logic for UNet
+    if bundle.last_segment_mask is not None:
+        mask_prob = torch.sigmoid(bundle.last_segment_mask[0, 0])
+        mask_area = (mask_prob > 0.5).sum().item()
+        
+        # Create visual mask overlay
+        mask_np = mask_prob.detach().cpu().numpy()
+        base_img = np.array(image.resize((bundle.image_size, bundle.image_size))).astype(np.float32) / 255.0
+        mask_heat = np.zeros_like(base_img)
+        mask_heat[..., 0] = mask_np # Red tint for mask
+        
+        mask_overlay = np.clip(base_img * 0.6 + mask_heat * 0.4, 0.0, 1.0)
+        mask_b64 = image_to_base64(Image.fromarray((mask_overlay * 255).astype(np.uint8)))
+        
+        if mask_area < 10 or (0.45 < pos_prob < 0.55):
+            diagnosis = "Inconclusive"
 
     return {
         "diagnosis": diagnosis,
@@ -225,4 +270,5 @@ async def predict(
         "positive_class": bundle.positive_name,
         "positive_threshold": bundle.pos_threshold,
         "heatmap_png_base64": heatmap_b64,
+        "mask_png_base64": mask_b64,
     }
