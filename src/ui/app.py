@@ -1,15 +1,11 @@
 import streamlit as st
-import torch
-import torch.nn as nn
-from torchvision import models, transforms
+import requests
 from PIL import Image
 import numpy as np
-import matplotlib.pyplot as plt
 import os
 import pandas as pd
-from pytorch_grad_cam import GradCAM
-from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
-from pytorch_grad_cam.utils.image import show_cam_on_image
+import base64
+from io import BytesIO
 from datetime import datetime
 
 # Import Custom Modules
@@ -20,11 +16,7 @@ from utils import report_generator
 st.set_page_config(page_title="PancreScan AI", page_icon="🏥", layout="wide")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL_PATH_DENSE = os.path.join(BASE_DIR, "outputs", "densenet121_best.pt")
-MODEL_PATH_EFFICIENT = os.path.join(BASE_DIR, "outputs", "demo_models", "efficientnet_v2_s_fold_1_best.pt")
-MODEL_PATH_CONVNEXT = os.path.join(BASE_DIR, "models", "convnext_tiny_best.pt") # Kept original expectation if it exists in future
-
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+API_URL = os.environ.get("API_URL", "http://api:8000")
 
 # --- Custom CSS ---
 ST_STYLE = """
@@ -177,75 +169,20 @@ ST_STYLE = """
 # --- App Layout ---
 st.markdown(ST_STYLE, unsafe_allow_html=True)
 
-# --- Transformations ---
-IMAGENET_MEAN = [0.485, 0.456, 0.406]
-IMAGENET_STD = [0.229, 0.224, 0.225]
 
-preprocess = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD)
-])
-
-# --- Model Loading ---
-@st.cache_resource
-def load_model(model_name):
+# --- Helper to Call API ---
+@st.cache_data(show_spinner=False)
+def analyze_scan(image_bytes, model_name, threshold):
+    files = {"file": ("scan.jpg", image_bytes, "image/jpeg")}
+    params = {"heatmap": True, "threshold": threshold, "model_name": model_name}
+    
     try:
-        model = None
-        trained_model_path = ""
-        
-        if "DenseNet121" in model_name:
-            model = models.densenet121(weights=None)
-            trained_model_path = MODEL_PATH_DENSE
-            num_ftrs = model.classifier.in_features
-            model.classifier = nn.Linear(num_ftrs, 2)
-        elif "EfficientNet-V2-S" in model_name:
-            model = models.efficientnet_v2_s(weights=None)
-            trained_model_path = MODEL_PATH_EFFICIENT
-            num_ftrs = model.classifier[1].in_features
-            model.classifier[1] = nn.Sequential(
-                nn.Dropout(0.2),
-                nn.Linear(num_ftrs, 2)
-            )
-        elif "ConvNeXt-Tiny" in model_name:
-            model = models.convnext_tiny(weights=None)
-            trained_model_path = MODEL_PATH_CONVNEXT
-            num_ftrs = model.classifier[2].in_features
-            model.classifier[2] = nn.Linear(num_ftrs, 2)
-        
-        elif "UNet" in model_name:
-            import sys
-            sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-            from src.models.unet import UNetMultiTask
-            model = UNetMultiTask(n_channels=3, n_classes=1, num_cls_classes=1)
-            trained_model_path = os.path.join(BASE_DIR, "outputs", "unet", "unet_multitask_best.pt")
-        
-        if os.path.exists(trained_model_path):
-            state_dict = torch.load(trained_model_path, map_location=DEVICE, weights_only=False)
-            model.load_state_dict(state_dict)
-            print(f"Loaded weights successfully from {trained_model_path}")
-        else:
-            st.error(f"⚠️ Critical: Could not find model weights at {trained_model_path}. Using random weights.")
-        
-        if model:
-            model.to(DEVICE)
-            model.eval()
-        return model
-    except Exception as e:
-        st.error(f"Error loading model: {e}")
+        response = requests.post(f"{API_URL}/predict", files=files, params=params)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        st.error(f"API Connection Error: {e}")
         return None
-
-# --- Grad-CAM Helper ---
-def get_target_layer(model, model_name):
-    if "DenseNet" in model_name:
-        return [model.features[-1]]
-    elif "EfficientNet" in model_name:
-        return [model.features[-1]]
-    elif "ConvNeXt" in model_name:
-        return [model.features[-1]]
-    elif "UNet" in model_name:
-        return [model.features]
-    return None
 
 def render_hero_section():
     st.markdown("""
@@ -468,37 +405,27 @@ def render_single_scan_ui(model_selector, threshold):
             st.image(image, caption="Input Scan", use_container_width=True)
             
             if st.button("🔍 Run Analysis", use_container_width=True):
-                with st.spinner("Analyzing scan pattern..."):
-                    model = load_model(model_selector)
+                with st.spinner("Analyzing scan with Ensemble APIs..."):
+                    # Convert PIL Image to Bytes for API
+                    img_bytes = BytesIO()
+                    image.save(img_bytes, format="JPEG")
+                    image_bytes_val = img_bytes.getvalue()
                     
-                    if model:
-                        # Preprocess
-                        input_tensor = preprocess(image).unsqueeze(0).to(DEVICE)
+                    api_result = analyze_scan(image_bytes_val, model_selector, threshold)
+                    
+                    if api_result:
+                        tumor_prob = api_result.get("confidence", 0.0)
+                        diagnosis = api_result.get("diagnosis", "Normal")
                         
-                        # Inference
-                        with torch.no_grad():
-                            outputs = model(input_tensor)
-                            if isinstance(outputs, tuple) and len(outputs) == 2:
-                                mask_pred, outputs = outputs
-                                mask_prob = torch.sigmoid(mask_pred[0, 0])
-                                st.session_state['last_mask'] = mask_prob.detach().cpu().numpy()
-                            else:
-                                st.session_state['last_mask'] = None
-                                
-                            if outputs.shape[1] == 1:
-                                tumor_prob = torch.sigmoid(outputs).item()
-                            else:
-                                probs = torch.softmax(outputs, dim=1)
-                                tumor_prob = probs[0][1].item()
-                            
                         # Store results in session state
                         st.session_state['tumor_prob'] = tumor_prob
                         st.session_state['analyzed'] = True
+                        st.session_state['api_result'] = api_result
                         
                         # Save to DB if patient selected
                         if selected_patient_id:
                             filename = uploaded_file.name if uploaded_file else "example.jpg"
-                            pred_label = "Tumor" if tumor_prob > threshold else "Normal"
+                            pred_label = "Tumor" if diagnosis == "pancreatic_tumor" else diagnosis
                             try:
                                 database.add_scan(
                                     selected_patient_id, 
@@ -513,18 +440,13 @@ def render_single_scan_ui(model_selector, threshold):
         
         with col2:
             if st.session_state.get('analyzed', False):
-                tumor_prob = st.session_state.get('tumor_prob', 0.0)
-                mask_np = st.session_state.get('last_mask', None)
+                api_result = st.session_state.get('api_result', {})
+                tumor_prob = api_result.get("confidence", 0.0)
+                diagnosis = api_result.get("diagnosis", "Unknown")
+                heatmap_b64 = api_result.get("heatmap_b64")
+                mask_b64 = api_result.get("mask_b64")
                 
-                is_tumor = tumor_prob > threshold
-                is_inconclusive = False
-                if mask_np is not None:
-                    mask_area = (mask_np > 0.5).sum()
-                    if mask_area < 10 or (0.45 < tumor_prob < 0.55):
-                        is_inconclusive = True
-                
-                # Dynamic Card Rendering
-                if is_inconclusive:
+                if diagnosis == "Inconclusive":
                     st.markdown(
                         f"""
                         <div class="result-card" style="background-color: #fff3cd; border-left: 6px solid #ffcc00; color: #856404;">
@@ -532,8 +454,7 @@ def render_single_scan_ui(model_selector, threshold):
                                 ⚠️ Inconclusive Data
                             </div>
                             <p style="font-size: 1.1rem;">
-                                The model could not find a clear pancreas region or the CT slice is poor quality (No Valid Anatomy Masked). 
-                                Please test another slice.
+                                The model could not find a clear pancreas region or the CT slice is poor quality.
                             </p>
                             <div style="margin-top: 15px;">
                                 <div class="confidence-label">Measured Confidence</div>
@@ -543,7 +464,7 @@ def render_single_scan_ui(model_selector, threshold):
                         """, 
                         unsafe_allow_html=True
                     )
-                elif is_tumor:
+                elif diagnosis == "pancreatic_tumor" or tumor_prob > threshold:
                     st.markdown(
                         f"""
                         <div class="result-card result-card-tumor">
@@ -580,40 +501,19 @@ def render_single_scan_ui(model_selector, threshold):
                 st.progress(tumor_prob)
                 st.caption(f"Tumor Probability: {tumor_prob:.4f}")
                 
-                if mask_np is not None:
+                if mask_b64:
                     st.markdown("#### Structural Mask Overlay (Pancreas)")
-                    base_img = np.array(image.resize((224, 224))).astype(np.float32) / 255.0
-                    mask_heat = np.zeros_like(base_img)
-                    mask_heat[..., 0] = mask_np # Red tint
-                    overlay = np.clip(base_img * 0.6 + mask_heat * 0.4, 0.0, 1.0)
-                    st.image(overlay, caption="Blue/Red highlight shows dynamically segmented pancreas", use_container_width=True)
+                    img_bytes = base64.b64decode(mask_b64)
+                    overlay_img = Image.open(BytesIO(img_bytes))
+                    st.image(overlay_img, caption="Blue/Red highlight shows dynamically segmented pancreas", use_container_width=True)
                 
                 with st.expander("Show AI Reasoning (Grad-CAM)"):
-                    try:
-                        target_layers = get_target_layer(model, model_selector)
-                        if target_layers:
-                            class _Wrapper(nn.Module):
-                                def __init__(self, m):
-                                    super().__init__()
-                                    self._m = m
-                                def forward(self, x):
-                                    o = self._m(x)
-                                    return o[1] if isinstance(o, tuple) else o
-                            
-                            wrapped = _Wrapper(model)
-                            cam = GradCAM(model=wrapped, target_layers=target_layers)
-                            targets = [ClassifierOutputTarget(0)] if outputs.shape[1] == 1 else [ClassifierOutputTarget(1)]
-                            input_tensor = preprocess(image).unsqueeze(0).to(DEVICE)
-                            
-                            grayscale_cam = cam(input_tensor=input_tensor, targets=targets)
-                            grayscale_cam = grayscale_cam[0, :]
-                            
-                            img_np = np.array(image.resize((224, 224))) / 255.0
-                            visualization = show_cam_on_image(img_np, grayscale_cam, use_rgb=True)
-                            
-                            st.image(visualization, caption="Heatmap: Red areas indicate regions contributing to Tumor classification", use_container_width=True)
-                    except Exception as e:
-                        st.warning(f"Visualization unavailable: {e}")
+                    if heatmap_b64:
+                        img_bytes = base64.b64decode(heatmap_b64)
+                        heatmap_img = Image.open(BytesIO(img_bytes))
+                        st.image(heatmap_img, caption="Heatmap: Red areas indicate regions contributing to Tumor classification", use_container_width=True)
+                    else:
+                        st.info("No Grad-CAM available for this prediction (usually only generated for Tumor class).")
 
 def render_batch_analysis_ui(model_selector, threshold):
     st.subheader("📦 Batch Analysis")
@@ -622,32 +522,25 @@ def render_batch_analysis_ui(model_selector, threshold):
     
     if uploaded_files:
         if st.button(f"Analyze {len(uploaded_files)} Scans"):
-            model = load_model(model_selector)
-            
             results = []
             progress_bar = st.progress(0)
             
             for i, file in enumerate(uploaded_files):
                 try:
-                    image = Image.open(file).convert("RGB")
-                    input_tensor = preprocess(image).unsqueeze(0).to(DEVICE)
+                    img_bytes = file.getvalue()
+                    api_result = analyze_scan(img_bytes, model_selector, threshold)
                     
-                    with torch.no_grad():
-                        outputs = model(input_tensor)
-                        if isinstance(outputs, tuple) and len(outputs) == 2:
-                            _, outputs = outputs
-                        if outputs.shape[1] == 1:
-                            tumor_prob = torch.sigmoid(outputs).item()
-                        else:
-                            probs = torch.softmax(outputs, dim=1)
-                            tumor_prob = probs[0][1].item()
-                    
-                    results.append({
-                        "Filename": file.name,
-                        "Prediction": "Tumor" if tumor_prob > threshold else "Normal",
-                        "Confidence": tumor_prob,
-                        "Status": "⚠️ High Risk" if tumor_prob > threshold else "✅ Normal"
-                    })
+                    if api_result:
+                        tumor_prob = api_result.get("confidence", 0.0)
+                        diag = api_result.get("diagnosis", "Unknown")
+                        results.append({
+                            "Filename": file.name,
+                            "Prediction": "Tumor" if diag == "pancreatic_tumor" else diag,
+                            "Confidence": tumor_prob,
+                            "Status": "⚠️ High Risk" if tumor_prob > threshold else ("✅ Normal" if diag != "Inconclusive" else "⚠️ Inconclusive")
+                        })
+                    else:
+                        raise Exception("API returned empty result")
                 except Exception as e:
                     results.append({
                         "Filename": file.name,
