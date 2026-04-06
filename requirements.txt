@@ -12,3 +12,9 @@ scikit-learn
 tqdm
 ttach
 grad-cam
+
+fastapi
+uvicorn[standard]
+python-multipart
+
+requests
