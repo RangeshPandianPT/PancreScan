@@ -171,37 +171,48 @@ class ModelBundle:
         self.pos_threshold = float(os.getenv("POSITIVE_THRESHOLD", "0.4"))
         self.preprocess = build_preprocess(self.image_size)
 
-        primary = ModelConfig(
-            model_name=os.getenv("PRIMARY_MODEL", "efficientnet_v2_s"),
-            checkpoint_path=os.getenv("PRIMARY_CHECKPOINT", "outputs/efficientnet_v2_s_best.pt"),
-        )
-        secondary_path = os.getenv("SECONDARY_CHECKPOINT")
-        secondary_name = os.getenv("SECONDARY_MODEL", "densenet121")
-        self.primary = load_model(primary, self.device)
-        self.secondary = None
-        self.ensemble_weights = (0.5, 0.5)
-        if secondary_path:
-            secondary = ModelConfig(model_name=secondary_name, checkpoint_path=secondary_path)
-            self.secondary = load_model(secondary, self.device)
-            self.ensemble_weights = parse_weights(os.getenv("ENSEMBLE_WEIGHTS", "0.5,0.5"))
+        self.models_cache = {}
+        self.grad_cam_cache = {}
+        self.last_segment_mask = None
+        self.last_grad_cam = None
 
-        target_layer = get_target_layer(self.primary, primary.model_name)
-        self.grad_cam = GradCAM(self.primary, target_layer)
+    def _map_display_name_to_internal(self, display_name: str) -> str:
+        if not display_name:
+            return os.getenv("PRIMARY_MODEL", "efficientnet_v2_s")
+        lower_name = display_name.lower()
+        if "efficientnet" in lower_name: return "efficientnet_v2_s"
+        if "densenet" in lower_name: return "densenet121"
+        if "convnext" in lower_name: return "convnext_tiny"
+        if "unet" in lower_name: return "unet"
+        return os.getenv("PRIMARY_MODEL", "efficientnet_v2_s")
 
-    def predict_logits(self, image_tensor: torch.Tensor) -> torch.Tensor:
-        out1 = self.primary(image_tensor)
-        if isinstance(out1, tuple) and len(out1) == 2:
-            self.last_segment_mask, logits = out1
+    def get_model_and_cam(self, display_name: str):
+        internal_name = self._map_display_name_to_internal(display_name)
+        if internal_name not in self.models_cache:
+            # Determine path
+            path = os.getenv(f"{internal_name.upper()}_CHECKPOINT", f"outputs/{internal_name}_best.pt")
+            config = ModelConfig(model_name=internal_name, checkpoint_path=path)
+            model = load_model(config, self.device)
+            # Ensure params require grad if we need GradCAM
+            for param in model.parameters():
+                param.requires_grad = True
+            self.models_cache[internal_name] = model
+            target_layer = get_target_layer(model, internal_name)
+            self.grad_cam_cache[internal_name] = GradCAM(model, target_layer)
+        return self.models_cache[internal_name], self.grad_cam_cache[internal_name]
+
+    def predict_logits(self, image_tensor: torch.Tensor, model_name: str) -> torch.Tensor:
+        model, grad_cam = self.get_model_and_cam(model_name)
+        self.last_grad_cam = grad_cam
+        
+        out = model(image_tensor)
+        if isinstance(out, tuple) and len(out) == 2:
+            self.last_segment_mask, logits = out
         else:
             self.last_segment_mask = None
-            logits = out1
+            logits = out
             
-        if self.secondary is None:
-            return logits
-            
-        out2 = self.secondary(image_tensor)
-        logits_secondary = out2[1] if isinstance(out2, tuple) and len(out2) == 2 else out2
-        return logits * self.ensemble_weights[0] + logits_secondary * self.ensemble_weights[1]
+        return logits
 
 
 bundle = ModelBundle()
@@ -219,18 +230,25 @@ def prepare_image(file: UploadFile) -> Image.Image:
 async def predict(
     file: UploadFile = File(...),
     heatmap: bool = Query(default=False, description="Return Grad-CAM overlay when positive."),
+    model_name: Optional[str] = Query(default=None, description="Model architecture to use."),
 ) -> dict:
     image = prepare_image(file)
     input_tensor = bundle.preprocess(image).unsqueeze(0).to(bundle.device)
+    input_tensor.requires_grad_(heatmap)
 
     start = time.perf_counter()
-    with torch.no_grad():
-        logits = bundle.predict_logits(input_tensor)
-        if logits.shape[1] == 1:
-            pos_prob = torch.sigmoid(logits).item()
-        else:
-            probs = torch.softmax(logits, dim=1)
-            pos_prob = probs[0, bundle.positive_index].item()
+    if heatmap:
+        # We need gradients for GradCAM, so no torch.no_grad()
+        logits = bundle.predict_logits(input_tensor, model_name)
+    else:
+        with torch.no_grad():
+            logits = bundle.predict_logits(input_tensor, model_name)
+
+    if logits.shape[1] == 1:
+        pos_prob = torch.sigmoid(logits).item()
+    else:
+        probs = torch.softmax(logits, dim=1)
+        pos_prob = probs[0, bundle.positive_index].item()
 
     inference_ms = (time.perf_counter() - start) * 1000.0
     diagnosis = (
@@ -240,9 +258,9 @@ async def predict(
     heatmap_b64: Optional[str] = None
     mask_b64: Optional[str] = None
     
-    if heatmap and diagnosis == bundle.positive_name:
+    if heatmap and diagnosis == bundle.positive_name and bundle.last_grad_cam is not None:
         score = logits[0, 0] if logits.shape[1] == 1 else logits[0, bundle.positive_index]
-        cam = bundle.grad_cam.generate(score, (bundle.image_size, bundle.image_size))
+        cam = bundle.last_grad_cam.generate(score, (bundle.image_size, bundle.image_size))
         overlay = make_overlay(image.resize((bundle.image_size, bundle.image_size)), cam)
         heatmap_b64 = image_to_base64(overlay)
 
