@@ -61,6 +61,17 @@ class PancreasDataset(Dataset):
             
         return image_tensor, mask_tensor, torch.tensor([label], dtype=torch.float32)
 
+def calculate_metrics(pred_mask, true_mask, smooth=1e-6):
+    pred_mask = (torch.sigmoid(pred_mask) > 0.5).float()
+    
+    intersection = (pred_mask * true_mask).sum(dim=(1, 2, 3))
+    union = pred_mask.sum(dim=(1, 2, 3)) + true_mask.sum(dim=(1, 2, 3)) - intersection
+    
+    iou = (intersection + smooth) / (union + smooth)
+    dice = (2. * intersection + smooth) / (pred_mask.sum(dim=(1, 2, 3)) + true_mask.sum(dim=(1, 2, 3)) + smooth)
+    
+    return iou.mean().item(), dice.mean().item()
+
 def train_unet():
     parser = argparse.ArgumentParser()
     parser.add_argument("--epochs", type=int, default=15)
@@ -121,6 +132,8 @@ def train_unet():
         val_loss = 0.0
         correct_cls = 0
         total_cls = 0
+        total_iou = 0.0
+        total_dice = 0.0
         
         with torch.no_grad():
             for images, masks, labels in val_loader:
@@ -135,12 +148,18 @@ def train_unet():
                 preds = torch.sigmoid(cls_logits) >= 0.5
                 correct_cls += (preds == labels).sum().item()
                 total_cls += labels.size(0)
+                
+                iou, dice = calculate_metrics(seg_logits, masks)
+                total_iou += iou
+                total_dice += dice
 
         train_loss /= len(train_loader)
         val_loss /= len(val_loader)
         val_acc = correct_cls / total_cls
+        val_iou = total_iou / len(val_loader)
+        val_dice = total_dice / len(val_loader)
 
-        print(f"Epoch {epoch+1} | Train Loss: {train_loss:.4f} (Seg: {train_seg_loss/len(train_loader):.4f}, Cls: {train_cls_loss/len(train_loader):.4f}) | Val Loss: {val_loss:.4f} | Val Cls Acc: {val_acc:.4f}")
+        print(f"Epoch {epoch+1} | Train Loss: {train_loss:.4f} (Seg: {train_seg_loss/len(train_loader):.4f}, Cls: {train_cls_loss/len(train_loader):.4f}) | Val Loss: {val_loss:.4f} | Val Cls Acc: {val_acc:.4f} | Val IoU: {val_iou:.4f} | Val Dice: {val_dice:.4f}")
 
         if val_loss < best_val_loss:
             best_val_loss = val_loss
