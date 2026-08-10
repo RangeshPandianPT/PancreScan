@@ -12,8 +12,13 @@ venv/
 # VS Code
 .vscode/
 
-# Datasets
+# Datasets & Data
 DATASET/
+data/
+
+# Tools & Generated Reports
+bfg.jar
+*.pdf
 
 # Model Weights (too large for GitHub)
 *.pt
