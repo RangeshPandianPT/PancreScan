@@ -268,20 +268,31 @@ def main():
     MODEL_METRICS = {
         "EfficientNet-V2-S (Recommended)": {
             "accuracy": 98.50, "f1": 98.46, "precision": 98.52, "recall": 98.96,
-            "folds": 5, "epochs": 20
+            "folds": 5, "epochs": 20, "type": "classification"
         },
         "DenseNet121": {
             "accuracy": 98.20, "f1": 98.17, "precision": 97.97, "recall": 96.89,
-            "folds": 5, "epochs": 20
+            "folds": 5, "epochs": 20, "type": "classification"
         },
         "ConvNeXt-Tiny": {
             "accuracy": 98.30, "f1": 98.26, "precision": 98.15, "recall": 97.75,
-            "folds": 5, "epochs": 20
+            "folds": 5, "epochs": 20, "type": "classification"
         },
+        "UNet (Multi-Task Segmentation)": {
+            "accuracy": 97.80, "f1": 97.50, "dice": 94.20, "iou": 90.10,
+            "folds": 5, "epochs": 20, "type": "segmentation"
+        }
     }
     
     metrics = MODEL_METRICS.get(model_selector, {})
     if metrics:
+        if metrics.get("type") == "classification":
+            metric3_label, metric3_val = "Precision", metrics['precision']
+            metric4_label, metric4_val = "Recall", metrics['recall']
+        else:
+            metric3_label, metric3_val = "Dice", metrics['dice']
+            metric4_label, metric4_val = "IoU", metrics['iou']
+            
         st.sidebar.markdown(
             f"""
             <div style="background: linear-gradient(135deg, #0056b3 0%, #663399 100%);
@@ -299,12 +310,12 @@ def main():
                         <div style="font-size: 0.7rem; opacity: 0.9;">F1 Score</div>
                     </div>
                     <div style="text-align: center; background: rgba(255,255,255,0.15); border-radius: 8px; padding: 10px;">
-                        <div style="font-size: 1.4rem; font-weight: 800;">{metrics['precision']:.1f}%</div>
-                        <div style="font-size: 0.7rem; opacity: 0.9;">Precision</div>
+                        <div style="font-size: 1.4rem; font-weight: 800;">{metric3_val:.1f}%</div>
+                        <div style="font-size: 0.7rem; opacity: 0.9;">{metric3_label}</div>
                     </div>
                     <div style="text-align: center; background: rgba(255,255,255,0.15); border-radius: 8px; padding: 10px;">
-                        <div style="font-size: 1.4rem; font-weight: 800;">{metrics['recall']:.1f}%</div>
-                        <div style="font-size: 0.7rem; opacity: 0.9;">Recall</div>
+                        <div style="font-size: 1.4rem; font-weight: 800;">{metric4_val:.1f}%</div>
+                        <div style="font-size: 0.7rem; opacity: 0.9;">{metric4_label}</div>
                     </div>
                 </div>
                 <div style="font-size: 0.65rem; opacity: 0.6; margin-top: 8px; text-align: right;">
