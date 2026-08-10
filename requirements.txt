@@ -18,3 +18,7 @@ uvicorn[standard]
 python-multipart
 
 requests
+
+# Testing
+pytest
+httpx
